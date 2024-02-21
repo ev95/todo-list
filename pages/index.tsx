@@ -9,7 +9,6 @@ function index() {
     <>
       <Navbar />
       <ToDoForm />
-      {/* <a href="/api/auth/login">Login</a> */}
     </>
   );
 }
