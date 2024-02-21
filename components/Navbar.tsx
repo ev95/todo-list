@@ -7,7 +7,7 @@ function Navbar() {
       <Toolbar>
         <Typography variant="h5">To Do List</Typography>
         <Button
-          href="#text-buttons"
+          href="/api/auth/login"
           variant="contained"
           sx={{
             marginLeft: "auto",
