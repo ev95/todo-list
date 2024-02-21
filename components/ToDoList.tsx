@@ -1,15 +1,15 @@
 import {
-  Checkbox,
-  IconButton,
   List,
   ListItem,
-  ListItemButton,
+  Checkbox,
+  IconButton,
   ListItemIcon,
   ListItemText,
+  ListItemButton,
 } from "@mui/material";
 import React, { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
 import ToDoItem from "@/Interfaces/ToDoItem";
+import CloseIcon from "@mui/icons-material/Close";
 
 function ToDoList({ list, updateList }) {
   const [checked, setChecked] = useState([0]);
@@ -18,27 +18,18 @@ function ToDoList({ list, updateList }) {
     const updatedList = [...list];
     updatedList.splice(index, 1);
     updateList(updatedList);
-
-    //   const currentIndex = checked.indexOf(value);
-    //   const newChecked = [...checked];
-
-    //   if (currentIndex === -1) {
-    //     newChecked.push(value);
-    //   } else {
-    //     newChecked.splice(currentIndex, 1);
-    //   }
-
-    //   setChecked(newChecked);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => () => {
-    console.log("clicked");
+  const handleChange = (isChecked: boolean, index: number) => {
+    const newList = [...list];
+    newList[index].isDone = !isChecked;
+    updateList(newList);
   };
 
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      {list.map((value, index) => {
-        const labelId = `checkbox-list-label-${value}`;
+      {list.map((value: ToDoItem, index: number) => {
+        const labelId = `checkbox-list-label-${index}`;
         return (
           <ListItem
             key={index}
@@ -58,13 +49,19 @@ function ToDoList({ list, updateList }) {
                 <Checkbox
                   edge="start"
                   checked={value.isDone}
-                  onChange={handleChange}
+                  onChange={() => handleChange(value.isDone, index)}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={index} primary={value.text} />
+              <ListItemText
+                sx={{
+                  textDecoration: value.isDone ? "line-through" : "normal",
+                }}
+                key={index}
+                primary={value.text}
+              />
             </ListItemButton>
           </ListItem>
         );
