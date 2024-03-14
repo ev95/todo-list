@@ -31,8 +31,21 @@ function ToDoForm() {
     setStrings(updatedList);
   };
 
+  // const count = list.filter(function (item) {
+  //   if (item.isDone) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }).length;
+
   return (
-    <Box sx={{ marginTop: "80px" }}>
+    <Box marginTop={2}>
+      <Typography variant="body2">
+        {/* {list && "You have created ${list.length} tasks"} */}
+      </Typography>
+      <ToDoForm />
+
       <form
         style={{
           display: "flex",

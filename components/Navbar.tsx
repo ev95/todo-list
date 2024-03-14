@@ -1,13 +1,20 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import React from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+
+{
+  /* <Link href="/api/auth/logout" */
+}
 
 function Navbar() {
+  const { user, error, isLoading } = useUser();
+
   return (
     <AppBar>
       <Toolbar>
         <Typography variant="h5">To Do List</Typography>
         <Button
-          href="/api/auth/login"
+          href={!user ? "/api/auth/login" : "/api/auth/logout"}
           variant="contained"
           sx={{
             marginLeft: "auto",
@@ -18,7 +25,7 @@ function Navbar() {
             },
           }}
         >
-          Login
+          {!user ? "Login" : "Logout"}
         </Button>
       </Toolbar>
     </AppBar>
